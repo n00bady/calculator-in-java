@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class calcUI extends mainCalculator {
     private static final float button_font_size = 20f;
@@ -18,6 +20,7 @@ public class calcUI extends mainCalculator {
     public calcUI() {
         int rows = button_labels.length;
         int cols = button_labels[0].length;
+        SimpleListener ourlistener = new SimpleListener();
 
         buttonPanel.setLayout(new GridLayout(rows, cols, GAP, GAP));
         for (String[] btnLabelRow : button_labels) {
@@ -27,6 +30,7 @@ public class calcUI extends mainCalculator {
                 } else {
                     JButton btn = createButton(btnLabel);
                     buttonPanel.add(btn);
+                    btn.addActionListener(ourlistener);
                 }
             }
         }
@@ -35,6 +39,7 @@ public class calcUI extends mainCalculator {
         display.setFocusable(false);
         display.setBackground(Color.BLACK);
         display.setForeground(Color.ORANGE);
+        display.setText("0");
 
         mainPanel.setBorder(BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP));
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
@@ -60,5 +65,12 @@ public class calcUI extends mainCalculator {
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+    }
+
+    private class SimpleListener implements ActionListener {
+        public void actionPerformed(ActionEvent ae){
+            String btnName = ae.getActionCommand();
+            display.setText(btnName);
+        }
     }
 }
