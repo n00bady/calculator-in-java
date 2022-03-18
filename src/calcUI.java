@@ -76,6 +76,7 @@ public class calcUI extends mainCalculator {
 
             if (ae.getActionCommand() == "+"){
                 System.out.println("tester: +");
+                display.setText("");
             }
             if (ae.getActionCommand() == "-"){
                 System.out.println("tester: -");
