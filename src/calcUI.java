@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 public class calcUI extends mainCalculator {
     private static final float button_font_size = 20f;
     private static final String[][] button_labels = {
-            {"7", "8", "9", " "},
-            {"4", "5", "6", " "},
-            {"1", "2", "3", " "},
-            {"0", ".", "=", "+"}
+            {"7", "8", "9", "+"},
+            {"4", "5", "6", "-"},
+            {"1", "2", "3", "*"},
+            {"0", ".", "=", "/"}
     };
 
     private static final int GAP = 4;
@@ -29,6 +29,8 @@ public class calcUI extends mainCalculator {
                     buttonPanel.add(new JLabel());
                 } else {
                     JButton btn = createButton(btnLabel);
+                    btn.setFocusable(false);
+                    btn.setBackground(Color.lightGray);
                     buttonPanel.add(btn);
                     btn.addActionListener(ourlistener);
                 }
@@ -68,9 +70,25 @@ public class calcUI extends mainCalculator {
     }
 
     private class SimpleListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae){
+        public void actionPerformed(ActionEvent ae) {
             String btnName = ae.getActionCommand();
             display.setText(btnName);
+
+            if (ae.getActionCommand() == "+"){
+                System.out.println("tester: +");
+            }
+            if (ae.getActionCommand() == "-"){
+                System.out.println("tester: -");
+            }
+            if (ae.getActionCommand() == "*"){
+                System.out.println("tester: *");
+            }
+            if (ae.getActionCommand() == "/"){
+                System.out.println("tester: /");
+            }
+            if (ae.getActionCommand() == "="){
+                System.out.println("tester: =");
+            }
         }
     }
 }
