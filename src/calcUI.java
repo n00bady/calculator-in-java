@@ -16,6 +16,9 @@ public class calcUI extends mainCalculator {
     private JPanel mainPanel = new JPanel(new BorderLayout(GAP, GAP));
     private JPanel buttonPanel = new JPanel();
     private JTextField display = new JTextField();
+    private String temp,temp1;
+    private double num,num2,result;
+    char operator;
 
     public calcUI() {
         int rows = button_labels.length;
@@ -70,26 +73,54 @@ public class calcUI extends mainCalculator {
     }
 
     private class SimpleListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            String btnName = ae.getActionCommand();
-            display.setText(btnName);
+        public void actionPerformed(ActionEvent ae){
 
             if (ae.getActionCommand() == "+"){
-                System.out.println("tester: +");
+                //temp = display.getText();
+                num = Double.parseDouble(display.getText());
+                operator = '+';
                 display.setText("");
+                //System.out.println(num);
             }
             if (ae.getActionCommand() == "-"){
-                System.out.println("tester: -");
+                num = Double.parseDouble(display.getText());
+                operator = '-';
+                display.setText("");
             }
             if (ae.getActionCommand() == "*"){
-                System.out.println("tester: *");
+                num = Double.parseDouble(display.getText());
+                operator = '*';
+                display.setText("");
             }
             if (ae.getActionCommand() == "/"){
-                System.out.println("tester: /");
+                num = Double.parseDouble(display.getText());
+                operator = '/';
+                display.setText("");
             }
             if (ae.getActionCommand() == "="){
-                System.out.println("tester: =");
+                num2 = Double.parseDouble(display.getText());
+                if(operator=='+'){
+                    result=num+num2;
+                }
+                if(operator=='-'){
+                    result=num-num2;
+                }
+                if(operator=='*'){
+                    result=num*num2;
+                }
+                if(operator=='/'){
+                    result=num/num2;
+                }
+                display.setText(String.valueOf(result));
+                num = result;
+                System.out.println(result);
             }
+            if (ae.getActionCommand() == "."){
+                display.setText(display.getText().concat("."));
+            }
+
+            String btnName = ae.getActionCommand();
+            display.setText(btnName);
         }
     }
 }
