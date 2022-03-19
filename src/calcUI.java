@@ -13,7 +13,7 @@ public class calcUI extends mainCalculator {
             {"7", "8", "9", "*"},
             {"4", "5", "6", "-"},
             {"1", "2", "3", "+"},
-            {"+/-", "0", "=", "="}
+            {"+/-", "0", ".", "="}
     };
 
     private static final int GAP = 4;
@@ -80,6 +80,14 @@ public class calcUI extends mainCalculator {
     private class SimpleListener implements ActionListener {
         public void actionPerformed(ActionEvent ae){
 
+            if (ae.getActionCommand() == "<-"){
+                String text = display.getText();
+                if(text.isEmpty()){
+                display.setText("0");
+            } else {
+                display.setText(text.substring(0, text.length() - 1));
+            }
+            }
             if (ae.getActionCommand() == "x^2"){
                 double num = Double.parseDouble(display.getText().toString());
                 num = num*num;
