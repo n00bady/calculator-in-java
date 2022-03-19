@@ -116,6 +116,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                 num = Double.parseDouble(display.getText());
                 operator = '/';
                 display.setText("");
+                break;
             default:
                 System.err.println("\uD83E\uDD14");
                 break;
@@ -141,6 +142,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                 case '/':
                     num2 = Double.parseDouble(display.getText());
                     result = num / num2;
+                    break;
                 default:
                     System.err.println("Something gone wrong!");
                     break;
