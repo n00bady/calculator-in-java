@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Arrays;
 
 public class calcUI extends mainCalculator {
     private static final float button_font_size = 20f;
@@ -19,6 +21,7 @@ public class calcUI extends mainCalculator {
     private String temp,temp1;
     private double num,num2,result;
     char operator;
+    List<String> numbers = Arrays.asList("1","2","3","4","5","6","7","8","9","0");
 
     public calcUI() {
         int rows = button_labels.length;
@@ -44,7 +47,7 @@ public class calcUI extends mainCalculator {
         display.setFocusable(false);
         display.setBackground(Color.BLACK);
         display.setForeground(Color.ORANGE);
-        display.setText("0");
+        display.setText("");
 
         mainPanel.setBorder(BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP));
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
@@ -120,7 +123,9 @@ public class calcUI extends mainCalculator {
             }
 
             String btnName = ae.getActionCommand();
-            display.setText(btnName);
+            if(numbers.contains(ae.getActionCommand())) {
+                display.setText(display.getText().concat(btnName));
+            }
         }
     }
 }
