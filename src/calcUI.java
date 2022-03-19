@@ -2,10 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 import java.util.Arrays;
 
-public class calcUI extends mainCalculator {
+public class calcUI extends mainCalculator implements KeyListener {
     private static final float button_font_size = 20f;
     private static final String[][] button_labels = {
             {"%", "CE", "C", "<-"},
@@ -75,6 +77,25 @@ public class calcUI extends mainCalculator {
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+        frame.addKeyListener(mainPanel);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        char key = e.getKeyChar();
+        if(numbers.contains(Character.toString(key))){
+            display.setText(display.getText().concat(Character.toString(key)));
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
     }
 
     private class SimpleListener implements ActionListener {
