@@ -8,11 +8,12 @@ import java.util.Arrays;
 public class calcUI extends mainCalculator {
     private static final float button_font_size = 20f;
     private static final String[][] button_labels = {
-            {"+/-", "%", "CE", "C"},
-            {"7", "8", "9", "+"},
+            {"%", "CE", "C", "<-"},
+            {"x^2", "log", "sqrt", "/"},
+            {"7", "8", "9", "*"},
             {"4", "5", "6", "-"},
-            {"1", "2", "3", "*"},
-            {"0", ".", "=", "/"}
+            {"1", "2", "3", "+"},
+            {"+/-", "0", "=", "="}
     };
 
     private static final int GAP = 4;
@@ -78,6 +79,18 @@ public class calcUI extends mainCalculator {
 
     private class SimpleListener implements ActionListener {
         public void actionPerformed(ActionEvent ae){
+
+            if (ae.getActionCommand() == "x^2"){
+                double num = Double.parseDouble(display.getText().toString());
+                num = num*num;
+                display.setText(String.valueOf(num));
+            }
+
+            if (ae.getActionCommand() == "sqrt"){
+                double num = Double.parseDouble(display.getText().toString());
+                num = Math.sqrt(num);
+                display.setText(String.valueOf(num));
+            }
 
             if (ae.getActionCommand() == "CE"){
                 display.setText("");
