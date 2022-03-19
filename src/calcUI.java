@@ -8,8 +8,8 @@ import java.util.Arrays;
 public class calcUI extends mainCalculator {
     private static final float button_font_size = 20f;
     private static final String[][] button_labels = {
-            {"C"},
-            {"7", "8", "9","+"},
+            {" ", " ", " ", "C"},
+            {"7", "8", "9", "+"},
             {"4", "5", "6", "-"},
             {"1", "2", "3", "*"},
             {"0", ".", "=", "/"}
