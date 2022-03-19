@@ -83,31 +83,99 @@ public class calcUI extends mainCalculator implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         char key = e.getKeyChar();
-        if(numbers.contains(Character.toString(key))){
-            display.setText(display.getText().concat(Character.toString(key)));
+        String keystr = Character.toString(key);
+        int k = e.getKeyCode();
+
+        // 8 == backspace
+        if (key == 8) {
+            if (!display.getText().isEmpty()) {
+                display.setText(display.getText().substring(0, display.getText().length() - 1));
+            } else {
+                System.err.println("display.getText() is empty! Nothing to delete back to.");
+            }
+        }
+
+        // Store 1st number and operation
+        switch (key){
+            case '+':
+                num = Double.parseDouble(display.getText());
+                operator = '+';
+                display.setText("");
+                break;
+            case '-':
+                num = Double.parseDouble(display.getText());
+                operator = '-';
+                display.setText("");
+                break;
+            case '*':
+                num = Double.parseDouble(display.getText());
+                operator = '*';
+                display.setText("");
+                break;
+            case '/':
+                num = Double.parseDouble(display.getText());
+                operator = '/';
+                display.setText("");
+            default:
+                System.err.println("\uD83E\uDD14");
+                break;
+        }
+
+        // Do the calculation with the 2nd number given
+        // 13 = CR but keycodes doesn't work for this but works for backspace ???
+        // the newline char will suffice for now...
+        if (key == '\n') {
+            switch (operator) {
+                case '+':
+                    num2 = Double.parseDouble(display.getText());
+                    result = num + num2;
+                    break;
+                case '-':
+                    num2 = Double.parseDouble(display.getText());
+                    result = num - num2;
+                    break;
+                case '*':
+                    num2 = Double.parseDouble(display.getText());
+                    result = num * num2;
+                    break;
+                case '/':
+                    num2 = Double.parseDouble(display.getText());
+                    result = num / num2;
+                default:
+                    System.err.println("Something gone wrong!");
+                    break;
+            }
+            // Display the result and put the result in the 1st num variable
+            display.setText(String.valueOf(result));
+            num = result;
+        }
+
+        if (numbers.contains(keystr) || keystr.equals(".")) {
+            display.setText(display.getText().concat(keystr));
         }
     }
 
+    // IDE thinks I need those even when they are empty so I left them here...
     @Override
-    public void keyPressed(KeyEvent keyEvent) {
+    public void keyPressed(KeyEvent e) {
 
     }
 
     @Override
-    public void keyReleased(KeyEvent keyEvent) {
+    public void keyReleased(KeyEvent e) {
 
     }
 
     private class SimpleListener implements ActionListener {
         public void actionPerformed(ActionEvent ae){
 
-            if (ae.getActionCommand() == "<-"){
+            if (ae.getActionCommand() == "<-") {
                 String text = display.getText();
                 if(text.isEmpty()){
-                display.setText("0");
-            } else {
-                display.setText(text.substring(0, text.length() - 1));
-            }
+                    display.setText("0");
+                } else {
+                    display.setText(text.substring(0, text.length() - 1));
+                }
             }
             if (ae.getActionCommand() == "x^2"){
                 double num = Double.parseDouble(display.getText().toString());
