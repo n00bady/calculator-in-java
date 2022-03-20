@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class calcUI extends mainCalculator implements KeyListener {
     private static final float button_font_size = 20f;
     private static final String[][] button_labels = {
-            {"%", "CE", "C", "<-"},
+            {"%", "AC", "C", "<-"},
             {"x^2", "log", "sqrt", "/"},
             {"7", "8", "9", "*"},
             {"4", "5", "6", "-"},
@@ -21,6 +21,7 @@ public class calcUI extends mainCalculator implements KeyListener {
     private static final int GAP = 4;
     private JPanel mainPanel = new JPanel(new BorderLayout(GAP, GAP));
     private JPanel buttonPanel = new JPanel();
+    private JTextField display2 = new JTextField();
     private JTextField display = new JTextField();
     private String temp,temp1;
     private double num,num2,result;
@@ -171,10 +172,16 @@ public class calcUI extends mainCalculator implements KeyListener {
     private class SimpleListener implements ActionListener {
         public void actionPerformed(ActionEvent ae){
 
+            if (ae.getActionCommand() == "+/-"){
+                double neg = Double.parseDouble(display.getText().toString());
+                neg *= -1;
+                display.setText(String.valueOf(neg));
+            }
+
             if (ae.getActionCommand() == "<-") {
                 String text = display.getText();
                 if(text.isEmpty()){
-                    display.setText("0");
+                    //display.setText("0");
                 } else {
                     display.setText(text.substring(0, text.length() - 1));
                 }
@@ -191,7 +198,11 @@ public class calcUI extends mainCalculator implements KeyListener {
                 display.setText(String.valueOf(num));
             }
 
-            if (ae.getActionCommand() == "CE"){
+            if (ae.getActionCommand() == "AC"){
+                num = 0;
+                num2 = 0;
+                result = 0;
+                operator = ' ';
                 display.setText("");
             }
 
