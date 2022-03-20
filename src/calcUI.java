@@ -23,7 +23,6 @@ public class calcUI extends mainCalculator implements KeyListener {
     private JPanel buttonPanel = new JPanel();
     private JTextField display2 = new JTextField();
     private JTextField display = new JTextField();
-    private String temp,temp1;
     private double num,num2,result;
     char operator;
     List<String> numbers = Arrays.asList("1","2","3","4","5","6","7","8","9","0");
@@ -85,7 +84,6 @@ public class calcUI extends mainCalculator implements KeyListener {
     public void keyTyped(KeyEvent e) {
         char key = e.getKeyChar();
         String keystr = Character.toString(key);
-        int k = e.getKeyCode();
 
         // 8 == backspace
         if (key == 8) {
@@ -148,7 +146,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                     System.err.println("Something gone wrong!");
                     break;
             }
-            // Display the result and put the result in the 1st num variable
+            // Display the result and then put the result in the 1st num variable
             display.setText(String.valueOf(result));
             num = result;
         }
@@ -158,7 +156,7 @@ public class calcUI extends mainCalculator implements KeyListener {
         }
     }
 
-    // IDE thinks I need those even when they are empty so I left them here...
+    // IDE thinks I need those even when they are empty so I left them here... ¯\_(ツ)_/¯
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -169,6 +167,8 @@ public class calcUI extends mainCalculator implements KeyListener {
 
     }
 
+    // most if could be replaced with simple switch
+    // some exception & error handling needed
     private class SimpleListener implements ActionListener {
         public void actionPerformed(ActionEvent ae){
 
@@ -186,6 +186,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                     display.setText(text.substring(0, text.length() - 1));
                 }
             }
+
             if (ae.getActionCommand() == "x^2"){
                 double num = Double.parseDouble(display.getText().toString());
                 num = num*num;
@@ -205,17 +206,14 @@ public class calcUI extends mainCalculator implements KeyListener {
                 operator = ' ';
                 display.setText("");
             }
-
             if (ae.getActionCommand() == "C"){
                 display.setText("");
             }
 
             if (ae.getActionCommand() == "+"){
-                //temp = display.getText();
                 num = Double.parseDouble(display.getText());
                 operator = '+';
                 display.setText("");
-                //System.out.println(num);
             }
             if (ae.getActionCommand() == "-"){
                 num = Double.parseDouble(display.getText());
@@ -232,6 +230,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                 operator = '/';
                 display.setText("");
             }
+
             if (ae.getActionCommand() == "="){
                 num2 = Double.parseDouble(display.getText());
                 if(operator=='+'){
@@ -250,10 +249,10 @@ public class calcUI extends mainCalculator implements KeyListener {
                 num = result;
                 System.out.println(result);
             }
+
             if (ae.getActionCommand() == "."){
                 display.setText(display.getText().concat("."));
             }
-
             String btnName = ae.getActionCommand();
             if(numbers.contains(ae.getActionCommand())) {
                 display.setText(display.getText().concat(btnName));
