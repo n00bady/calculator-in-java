@@ -253,6 +253,9 @@ public class calcUI extends mainCalculator implements KeyListener {
                 if(operator=='/'){
                     result=num/num2;
                 }
+                if(operator=='%'){
+                    result=((num/100)*num2);
+                }
                 display.setText(String.valueOf(result));
                 num = result;
                 System.out.println(result);
@@ -264,6 +267,16 @@ public class calcUI extends mainCalculator implements KeyListener {
             String btnName = ae.getActionCommand();
             if(numbers.contains(ae.getActionCommand())) {
                 display.setText(display.getText().concat(btnName));
+            }
+            if (ae.getActionCommand() == "log"){
+                double num = Double.parseDouble(display.getText().toString());
+                num = Math.log(num);
+                display.setText(String.valueOf(num));
+            }
+            if (ae.getActionCommand() == "%") {
+                num = Double.parseDouble(display.getText());
+                operator = '%';
+                display.setText("");
             }
         }
     }
