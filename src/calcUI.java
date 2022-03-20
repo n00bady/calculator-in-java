@@ -30,7 +30,6 @@ public class calcUI extends mainCalculator implements KeyListener {
     public calcUI() {
         int rows = button_labels.length;
         int cols = button_labels[0].length;
-        SimpleListener ourlistener = new SimpleListener();
 
         // button panel
         buttonPanel.setLayout(new GridLayout(rows, cols, GAP, GAP));
@@ -41,10 +40,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                     buttonPanel.add(new JLabel());
                 } else {
                     JButton btn = createButton(btnLabel);
-                    btn.setFocusable(false);
-                    btn.setBackground(Color.lightGray);
                     buttonPanel.add(btn);
-                    btn.addActionListener(ourlistener);
                 }
             }
         }
@@ -66,7 +62,12 @@ public class calcUI extends mainCalculator implements KeyListener {
 
     private JButton createButton(String btnLabel) {
         JButton button = new JButton(btnLabel);
+        SimpleListener ourlistener = new SimpleListener();
+
         button.setFont(button.getFont().deriveFont(button_font_size));
+        button.setFocusable(false);
+        button.setBackground(Color.LIGHT_GRAY);
+        button.addActionListener(ourlistener);
         return button;
     }
 
