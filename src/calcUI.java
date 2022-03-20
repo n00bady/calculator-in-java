@@ -18,7 +18,7 @@ public class calcUI extends mainCalculator implements KeyListener {
             {"+/-", "0", ".", "="}
     };
 
-    private static final int GAP = 4;
+    private static final int GAP = 6;
     private JPanel mainPanel = new JPanel(new BorderLayout(GAP, GAP));
     private JPanel buttonPanel = new JPanel();
     private JTextField display2 = new JTextField();
@@ -32,7 +32,9 @@ public class calcUI extends mainCalculator implements KeyListener {
         int cols = button_labels[0].length;
         SimpleListener ourlistener = new SimpleListener();
 
+        // button panel
         buttonPanel.setLayout(new GridLayout(rows, cols, GAP, GAP));
+        buttonPanel.setBackground(Color.DARK_GRAY);
         for (String[] btnLabelRow : button_labels) {
             for (String btnLabel : btnLabelRow) {
                 if(btnLabel.trim().isEmpty()) {
@@ -46,6 +48,8 @@ public class calcUI extends mainCalculator implements KeyListener {
                 }
             }
         }
+
+        // display text field
         display.setFont(display.getFont().deriveFont(button_font_size));
         display.setEditable(false);
         display.setFocusable(false);
@@ -53,9 +57,11 @@ public class calcUI extends mainCalculator implements KeyListener {
         display.setForeground(Color.ORANGE);
         display.setText("");
 
+        // main panel
         mainPanel.setBorder(BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP));
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
         mainPanel.add(display, BorderLayout.PAGE_START);
+        mainPanel.setBackground(Color.DARK_GRAY);
     }
 
     private JButton createButton(String btnLabel) {
@@ -71,6 +77,7 @@ public class calcUI extends mainCalculator implements KeyListener {
     public static void createAndShowGui() {
         calcUI mainPanel = new calcUI();
 
+        // the frame is covered completely by the main panel
         JFrame frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(mainPanel.getMainComponent());
