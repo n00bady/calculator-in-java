@@ -222,6 +222,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                 result = 0;
                 operator = ' ';
                 display.setText("");
+                frame.remove(mainPanel);
                 resetGUI();
             }
             if (ae.getActionCommand() == "C"){
