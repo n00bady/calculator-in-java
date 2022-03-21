@@ -26,6 +26,7 @@ public class calcUI extends mainCalculator implements KeyListener {
     private double num,num2,result;
     char operator;
     List<String> numbers = Arrays.asList("1","2","3","4","5","6","7","8","9","0");
+    private JButton pressed = new JButton();
 
     public calcUI() {
         int rows = button_labels.length;
@@ -213,6 +214,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                 result = 0;
                 operator = ' ';
                 display.setText("");
+                pressed.setBackground(Color.LIGHT_GRAY);
             }
             if (ae.getActionCommand() == "C"){
                 display.setText("");
@@ -220,21 +222,29 @@ public class calcUI extends mainCalculator implements KeyListener {
 
             if (ae.getActionCommand() == "+"){
                 num = Double.parseDouble(display.getText());
+                pressed = (JButton) ae.getSource();
+                pressed.setBackground(Color.RED);
                 operator = '+';
                 display.setText("");
             }
             if (ae.getActionCommand() == "-"){
                 num = Double.parseDouble(display.getText());
+                pressed = (JButton) ae.getSource();
+                pressed.setBackground(Color.RED);
                 operator = '-';
                 display.setText("");
             }
             if (ae.getActionCommand() == "*"){
                 num = Double.parseDouble(display.getText());
+                pressed = (JButton) ae.getSource();
+                pressed.setBackground(Color.RED);
                 operator = '*';
                 display.setText("");
             }
             if (ae.getActionCommand() == "/"){
                 num = Double.parseDouble(display.getText());
+                pressed = (JButton) ae.getSource();
+                pressed.setBackground(Color.RED);
                 operator = '/';
                 display.setText("");
             }
@@ -256,6 +266,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                 if(operator=='%'){
                     result=((num/100)*num2);
                 }
+                pressed.setBackground(Color.LIGHT_GRAY);
                 display.setText(String.valueOf(result));
                 num = result;
                 System.out.println(result);
