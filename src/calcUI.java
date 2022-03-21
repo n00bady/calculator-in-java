@@ -19,6 +19,7 @@ public class calcUI extends mainCalculator implements KeyListener {
     };
 
     private static final int GAP = 6;
+    private static JFrame frame = new JFrame("Calculator");
     private JPanel mainPanel = new JPanel(new BorderLayout(GAP, GAP));
     private JPanel buttonPanel = new JPanel();
     private JTextField display2 = new JTextField();
@@ -80,13 +81,20 @@ public class calcUI extends mainCalculator implements KeyListener {
         calcUI mainPanel = new calcUI();
 
         // the frame is covered completely by the main panel
-        JFrame frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(mainPanel.getMainComponent());
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
         frame.addKeyListener(mainPanel);
+    }
+
+    // probably there is a better way but this works :^)
+    public static void resetGUI() {
+        calcUI mainPanel = new calcUI();
+
+        frame.getContentPane().add(mainPanel.getMainComponent());
+        frame.pack();
     }
 
     @Override
@@ -214,7 +222,7 @@ public class calcUI extends mainCalculator implements KeyListener {
                 result = 0;
                 operator = ' ';
                 display.setText("");
-                pressed.setBackground(Color.LIGHT_GRAY);
+                resetGUI();
             }
             if (ae.getActionCommand() == "C"){
                 display.setText("");
