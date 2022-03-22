@@ -95,6 +95,7 @@ public class calcUI extends mainCalculator implements KeyListener {
 
         frame.getContentPane().add(mainPanel.getMainComponent());
         frame.pack();
+        frame.addKeyListener(mainPanel);
     }
 
     @Override
